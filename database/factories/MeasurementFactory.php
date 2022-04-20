@@ -17,10 +17,15 @@ class MeasurementFactory extends Factory
      */
     public function definition()
     {
+        $blood1 = $this->faker->numberBetween(16, 40) * 5;
+        $blood2 = 201;
+        while ($blood2 > $blood1) {
+            $blood2 = $this->faker->numberBetween(8, 30) * 5;
+        }
         return [
             'weight_kg' => $this->faker->randomFloat(2, 50, 200),
             'fat_percentage' => $this->faker->randomFloat(2, 0, 100),
-            'blood_pressure' => $this->faker->numberBetween(5, 25) * 10 . ' / ' . $this->faker->numberBetween(5, 25) * 10,
+            'blood_pressure' => $blood1 . ' / ' . $blood2,
             'client_id' => Client::all()->random()->id,
         ];
     }
